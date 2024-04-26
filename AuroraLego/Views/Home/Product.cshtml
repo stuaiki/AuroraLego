@@ -1,0 +1,128 @@
+@{
+}
+
+@model ProductRecommendationViewModel
+
+<!-- breadcrumbs -->
+<section class="breadcrumbs bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Shop">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Product</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- product -->
+<section class="hero bg-light pt-5">
+  <div class="container">
+    <div class="row gutter-2 gutter-md-4 justify-content-between">
+
+      <div class="col-lg-7">
+        <div class="row gutter-1 justify-content-between">
+          <div class="col-lg-10 order-lg-2">
+            <div class="owl-carousel gallery" data-slider-id="1" data-thumbs="true" data-nav="true">
+              <figure class="equal">
+                <a class="image" 
+                   style="background-image: url(@Model.Product.img_link);">
+                </a>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-2 text-center text-lg-left order-lg-1">
+            <div class="owl-thumbs" data-slider-id="1">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <div class="row">
+          <div class="col-12">
+            <span class="item-brand">@Model.Product.category</span>
+            <h1 class="item-title">@Model.Product.name</h1>
+            <span class="item-price">$@Model.Product.price</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 20em; white-space: normal;">@Model..Product.description</p>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label>Colors</label>
+              <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons" disabled>
+                <label class="btn text-@Model.Product.primary_color.ToLower()" checked disabled>
+                  <input type="radio" name="options" id="option1-2">
+                </label>
+                <label class="btn text-@Model.Product.secondary_color.ToLower()" checked disabled>
+                  <input type="radio" name="options" id="option2-2">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <form id="@Model.Product.product_ID" method="post" asp-page="/Cart">
+              <input type="hidden" asp-for="@Model.Product.product_ID" />
+              <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+              <button type="submit" class="btn btn-block btn-lg btn-primary"><a>Add to Cart</a></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- related products -->
+<section class="no-overflow">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
+              @foreach (var product in Model.GroupProducts)
+              {
+                <div class="product" style="margin: 0 10px;">
+                  <figure class="product-image">
+                    <a href="#!">
+                      <img src="@product.img_link" alt="Image" style="width: 100%; max-height: 300px; min-height: 200px;">
+                    </a>
+                  </figure>
+                  <div class="product-meta">
+                    <h3 class="product-title"><a href="#!">@product.name</a></h3>
+                    <div class="product-price">
+                      <span>$@product.price</span>
+                      <span class="product-action">
+                        <a href="#!">Add to cart</a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

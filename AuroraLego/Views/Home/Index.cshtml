@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@using Microsoft.AspNetCore.Identity
+@model HomePageViewModel
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Styles for the cookie consent popup */
+      .cookie-consent-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999; /* Ensure the popup is above all other content */
+      }
+      .cookie-consent-popup {
+          background-color: #F0F0F0;
+          padding: 20px;
+          text-align: center;
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+          max-width: 80%; /* Adjust the width as needed */
+          z-index: 10000; /* Ensure the popup is above the overlay */
+      }
+      .cookie-consent-popup p {
+          margin-bottom: 10px;
+      }
+      .cookie-consent-popup button {
+          padding: 10px 20px;
+          cursor: pointer;
+          margin: 0 10px;
+      }
+      .cookie-consent-popup button.accept {
+          background-color: green;
+          color: white;
+          border: none;
+      }
+      .cookie-consent-popup button.reject {
+          background-color: white;
+          color: green;
+          border: 2px solid green;
+      }
+    </style>
+</head>
+
+<!-- hero -->
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="image image-overlay image-zoom" style="background-image:url(/images/LegoBackground.jpg)"></div>
+      <div class="container">
+        <div class="row align-items-center vh-100">
+          <div class="col-lg-8 text-white" data-swiper-parallax-x="-100%">
+            <h1 class="display-1 mt-1 mb-3 font-weight-light">Aurora Bricks<b class="d-block">Lego Store</b></h1>
+            <a asp-controller="Home" asp-action="Shop" class="btn btn-sm btn-white btn-action">Shop Now<span class="icon-arrow-right"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="no-overflow">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
+              @if (User.IsInRole("Admin") || User.IsInRole("Customer"))
+              {
+                  @foreach (var product in Model.GroupOfProducts)
+                  {
+                      <div class="product" style="margin: 0 10px;">
+                          <figure class="product-image">
+                              <a href="#!">
+                                  <img src="@product.img_link" alt="Image" style="width: 100%; max-height: 300px; min-height: 200px;">
+                              </a>
+                          </figure>
+                          <div class="product-meta">
+                              <h3 class="product-title"><a href="#!">@product.name</a></h3>
+                              <div class="product-price">
+                                  <span>$@product.price</span>
+                                  <span class="product-action">
+                                      <a href="#!">Add to cart</a>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                  }
+              }
+              else
+              {
+                  @foreach (var product in Model.Products)
+                  {
+                      <div class="product" style="margin: 0 10px;">
+                          <figure class="product-image">
+                              <a href="#!">
+                                  <img src="@product.img_link" alt="Image" style="width: 100%; max-height: 300px; min-height: 200px;">
+                              </a>
+                          </figure>
+                          <div class="product-meta">
+                              <h3 class="product-title"><a href="#!">@product.name</a></h3>
+                              <div class="product-price">
+                                  <span>$@product.price</span>
+                                  <span class="product-action">
+                                      <a href="#!">Add to cart</a>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                  }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- instagram -->
+<section class="pb-1 no-overflow" style="padding-top: 0px;">
+  <div class="container">
+    <div class="row gutter-1">
+      <div class="col-md-6 col-lg-4 level-1">
+        <div class="card card-equal bg-primary text-white">
+          <div class="card-header p-4">
+            <i class="icon-instagram fs-30"></i>
+          </div>
+          <div class="card-footer p-4">
+            <h2 class="card-title fs-30 w-75">We are active on <a href="#!" class="font-weight-bold underline">Instagram</a></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-8">
+        <div class="owl-carousel owl-carousel-alt visible" data-items="[2,2,1,1]" data-margin="10" data-loop="true" data-nav="true">
+          <figure class="equal"><a class="image image-fade" style="background-image: url(/images/batmanlego.jpg)"></a></figure>
+          <figure class="equal"><a class="image image-fade" style="background-image: url(/images/supermanlego.jpg)"></a></figure>
+          <figure class="equal"><a class="image image-fade" style="background-image: url(/images/carlego.jpg)"></a></figure>
+          <figure class="equal"><a class="image image-fade" style="background-image: url(/images/airplanelego.jpg)"></a></figure>
+          <figure class="equal"><a class="image image-fade" style="background-image: url(/images/helicopterlego.jpg)"></a></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cookie consent popup -->
+<div class="cookie-consent-overlay" id="cookieConsentOverlay">
+  <div class="cookie-consent-popup" style="width: 500px;">
+    <p>
+      <strong>GDPR Notice</strong><br>
+      We collect personal information as specified in the <a href="/privacy">privacy policy</a> and use cookies or similar technologies for technical purposes and, with your consent, for other purposes as specified.
+      <br /><br />Use the “Accept” button to consent.
+    </p>
+    <button style="background-color: green; color: white; border: none; padding: 10px 20px; cursor: pointer;" onclick="acceptCookies()">Accept Cookies</button>
+    <button style="background-color: white; color: green; border: 2px solid green; padding: 10px 20px; cursor: pointer;" onclick="deleteCookies()">Reject Cookies</button>
+  </div>
+</div>
+<script>
+    // Function to close the cookie consent popup
+    function closeCookieConsentPopup() {
+        document.getElementById('cookieConsentOverlay').style.display = 'none';
+    }
+    // Function to handle accepting cookies
+    function acceptCookies() {
+        closeCookieConsentPopup();
+    }
+    // Function to handle rejecting cookies
+    function deleteCookies() {
+        closeCookieConsentPopup();
+    }
+    // Automatically close the popup after a certain time (e.g., 30 seconds)
+    setTimeout(closeCookieConsentPopup, 90000);
+</script>

@@ -1,0 +1,63 @@
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <title>@ViewData["Title"] - INTEXGroup3_7</title>
+  <link rel="stylesheet" href="/css/vendor.css" asp-append-version="true"/>
+  <link rel="stylesheet" href="/css/style.css" asp-append-version="true"/>
+</head>
+<body>
+<!-- header -->
+<header class="header header-dark bg-dark header-sticky separator-bottom">
+  <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="" class="navbar-brand order-1 order-lg-2"><img src="/images/logo.svg" alt="Logo"></a>
+        <button class="navbar-toggler order-2" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3 order-lg-1" id="navbarMenu">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
+            <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Shop" asp-route-pageNum="1">Shop</a></li>
+          </ul>
+        </div>
+        <vc:cart-summary />
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- footer -->
+<footer class="bg-dark text-white py-4 position-relative overflow-hidden">
+  <div class="position-absolute start-0 top-0 w-100 opacity-6" style="margin-top: -40px;">
+    <img src="/images/waves-white.svg" alt="pattern-lines" class="w-100 h-100 opacity-6">
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-3 text-center">
+        <p>Copyright &copy; 2024 - Team 3-7</p>
+      </div>
+      <div class="col-1"></div> <!-- Added an empty column for spacing -->
+      <div class="col-6 text-center">
+        <a class="mr-3" asp-controller="Home" asp-action="Index">Home</a>
+        <a class="mr-3" asp-controller="Home" asp-action="About">About</a>
+        <a class="mr-3" asp-controller="Home" asp-action="Shop">Shop</a>
+        <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/js/site.js" asp-append-version="true"></script>
+<script src="/js/vendor.min.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

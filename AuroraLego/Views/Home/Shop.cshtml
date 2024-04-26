@@ -1,0 +1,69 @@
+@{
+  ViewData["Title"] = "Shop";
+}
+@model ProductsViewModel
+
+<!-- header -->
+<section class="hero hero-small">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h1 class="mb-0">Shop</h1>
+        <nav aria-label="breadcrumb">
+          <p>Aurora's Favorite Lego Sets</p>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- listing -->
+<section class="pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="row gutter-1 gutter-md-2 align-items-center">
+          <div class="col-md-6">
+            <span class="eyebrow">@Model.PaginationInfo.TotalItems products</span>
+          </div>
+          <div class="col-md-6 text-md-right">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <div class="dropdown">
+                <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#!" role="button" id="dropdownMenuLink-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Products Displayed
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-3">
+                  <a class="dropdown-item" asp-controller="Home" asp-action="Shop" asp-route-productNum="5">5 Products</a><br/>
+                  <a class="dropdown-item" asp-controller="Home" asp-action="Shop" asp-route-productNum="10">10 Products</a><br/>
+                  <a class="dropdown-item" asp-controller="Home" asp-action="Shop" asp-route-productNum="20">20 Products</a>
+                </div>
+              </div>
+              <button data-toggle="modal" data-target="#filter" type="button" class="btn btn-sm btn-outline-secondary">Filter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+      <!-- content -->
+      <div class="col">
+        <div class="row gutter-2 gutter-lg-3">
+          @foreach (Product p in Model.Products)
+          {
+            <partial name="ProductSummary" model="p"/>
+          }
+        </div>
+        <div class="row">
+          <div class="col">
+            <nav class="d-inline-block">
+              <div page-model="@Model.PaginationInfo" page-action="Shop" page-class-enabled="true"
+                   page-class="page-link" page-class-normal="page-item" page-class-selected="page-item active" page-url-selectedColors="@Model.CurrentProductColors" page-url-productNum="@Model.CurrentProductNumber" page-url-selectedCategories="@Model.CurrentProductCategories" class="pagination"></div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <vc:product-types />
+</section>

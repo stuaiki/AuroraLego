@@ -1,0 +1,35 @@
+@{
+
+}
+@model Product
+
+<section class="py-md-0">
+    <div class="image image-overlay" style="background-image:url(/images/vault.jpg)"></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-md-100">
+            <div class="col-md-10 col-lg-5">
+                <div class="accordion accordion-portal" id="accordionExample">
+                    <div class="card active">
+                        <form method="post">
+                            <input type="hidden" asp-for="product_ID">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Delete Product
+                                    </button>
+                                </h2>
+                            </div>
+                            <div style="margin-bottom: 20px">
+                                <h4>Do you really want to delete: <br/>@Model.name</h4>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-block btn-danger"><a>Delete</a></button>
+                                <button class="btn btn-block btn-primary" asp-controller="Home" asp-action="Admin"><a>Cancel</a></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

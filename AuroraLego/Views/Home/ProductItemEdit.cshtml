@@ -1,0 +1,108 @@
+@{
+
+}
+@model Product
+
+<section class="py-md-0">
+    <div class="image image-overlay" style="background-image:url(/images/vault.jpg)"></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-md-100">
+            <div class="col-md-10 col-lg-5">
+                <div class="accordion accordion-portal" id="accordionExample">
+                    <div class="card active">
+                        <form method="post">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <a asp-controller="Home" asp-action="Admin">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Edit Product
+                                </button>
+                                </a>
+                            </h2>
+                        </div>
+                        
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="hidden" asp-for="product_ID"/>
+                                    <label for="id">Product Id</label>
+                                    <input for="id" class="form-control" value="@Model.product_ID" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="name">Name</label>
+                                    <input asp-for="name" class="form-control" value="@Model.name">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="year">Year</label>
+                                    <input asp-for="year" class="form-control" value="@Model.year">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="num_parts">Number of Parts</label>
+                                    <input asp-for="num_parts" class="form-control" value="@Model.num_parts">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="price">Price</label>
+                                    <input asp-for="price" class="form-control" value="@Model.price">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="img_link">Image Link</label>
+                                    <input asp-for="img_link" class="form-control" value="@Model.img_link">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="primary_color">Primary Color</label>
+                                        <select asp-for="primary_color" class="form-control">
+                                            <option value="@Model.primary_color">@Model.primary_color</option>
+                                            @foreach (var color in ViewBag.PrimaryColors)
+                                            {
+                                                <option value="@color">@color</option>
+                                            }
+                                        </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="secondary_color">Secondary Color</label>
+                                        <select asp-for="secondary_color" class="form-control">
+                                            <option value="@Model.secondary_color">@Model.secondary_color</option>
+                                            @foreach (var seccolor in ViewBag.SecondaryColors)
+                                            {
+                                                <option value="@seccolor">@seccolor</option>
+                                            }
+                                        </select>
+                                </div>
+                                    <div class="form-group">
+                                        <label asp-for="category">Category</label>
+                                        <select asp-for="category" class="form-control">
+                                            <option value="@Model.category">@Model.category</option>
+                                            @foreach (var cat in ViewBag.Categories)
+                                            {
+                                                <option value="@cat">@cat</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="subcategory">Subcategory</label>
+                                        <select asp-for="subcategory" class="form-control">
+                                            <option value="@Model.subcategory">@Model.subcategory</option>
+                                            @foreach (var subcat in ViewBag.SubCategories)
+                                            {
+                                                <option value="@subcat">@subcat</option>
+                                            }
+                                        </select>
+                                    </div>
+                                <div class="form-group">
+                                    <label asp-for="description">Description</label>
+                                    <input asp-for="description" class="form-control" value="@Model.description">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-block btn-primary"><a>Edit</a></button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

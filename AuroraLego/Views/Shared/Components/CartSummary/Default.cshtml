@@ -1,0 +1,21 @@
+@{
+}
+
+@model Cart
+
+<div class="collapse navbar-collapse order-4 order-lg-3" id="navbarMenu2">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <partial name="_loginPartial"/>
+        </li>
+        @if (Model.Lines.Count() > 0)
+        {
+            <li class="nav-item">
+                <a class="nav-link">@Model.CalculateTotal().ToString("c")</a>
+            </li>
+        }
+        <li class="nav-item cart">
+            <a asp-page="/Cart" asp-route-returnurl="@ViewContext.HttpContext.Request.PathAndQuery()" class="nav-link"><span>Cart</span><span>@Model.Lines.Sum(x => x.Quantity)</span></a>
+        </li>
+    </ul>
+</div>

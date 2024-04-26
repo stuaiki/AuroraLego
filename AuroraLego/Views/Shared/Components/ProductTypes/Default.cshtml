@@ -1,0 +1,88 @@
+@{
+    
+}
+@model ProductFilterViewModel
+
+<!-- filter -->
+<form asp-controller="Home" asp-action="Shop" asp-route-pageNum="1" method="get">
+  <div class="modal fade sidebar" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filterLabel">Filter</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <!-- Categories -->
+          <div class="widget">
+            <span class="widget-collapse d-lg-none" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2" role="button">
+              Filter by Categories
+            </span>
+            <div class="d-lg-block collapse" id="collapse-2">
+              <span class="widget-title">Categories</span>
+              <div class="widget-content">
+                  <ul style="columns: 2;">
+                      @{ var iCategory = 1; }
+              
+                      @foreach (var cat in Model.Category)
+                      {
+                          <li>
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" name="selectedCategories" id="customCheck-@iCategory" value="@cat" @(ViewBag.selectedCategories != null && cat.Contains(ViewBag.selectedCategories) ? "checked" : ""))>
+                                  <label class="custom-control-label" for="customCheck-@iCategory">@cat</label>
+                              </div>
+                          </li>
+                          iCategory++;
+                      }
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <!-- / Categories -->
+
+          <!-- color -->
+          <div class="widget">
+            <span class="widget-collapse d-lg-none" data-toggle="collapse" data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4" role="button">
+              Filter by Color
+            </span>
+            <div class="d-lg-block collapse" style="width: 300px" id="collapse-2">
+              <span class="widget-title">Color</span>
+              <div class="widget-content">
+                <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
+                  @{ var iCount = 1; }
+
+                  @foreach (var col in Model.Colors)
+                  {
+                    <label class="btn text-@col.ToLower() @(Array.IndexOf((string[])ViewBag.selectedColors, col) != -1 ? "active" : "")" style="background-color: #f1f1f1">
+                      <input type="checkbox" name="selectedColors" id="colors-@col" value="@col">
+                    </label>
+                    iCount++;
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- / color -->
+        
+        </div>
+        <div class="modal-footer">
+          <div class="container-fluid">
+            <div class="row gutter-0" style="margin-bottom: 20px;">
+              <div class="col">
+                <a asp-controller="Home" asp-action="Shop" asp-route-productColor="" asp-route-productCategory="" class="btn btn-lg btn-block btn-outline-primary">Clear All</a>
+              </div>
+            </div>
+            <div class="row gutter-0">
+              <div class="col">
+                <button type="submit" class="btn btn-lg btn-block btn-primary">Apply Filter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

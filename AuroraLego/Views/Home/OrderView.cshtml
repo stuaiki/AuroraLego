@@ -1,0 +1,89 @@
+@{
+
+}
+@model Order
+
+<section class="py-md-0">
+    <div class="image image-overlay" style="background-image:url(/images/vault.jpg)"></div>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-md-100">
+            <div class="col-md-10 col-lg-5">
+                <div class="accordion accordion-portal" id="accordionExample">
+                    <div class="card active">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    View Order
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <input type="hidden" asp-for="transaction_ID"/>
+                                <input type="hidden" asp-for="customer_ID"/>
+                                <div class="form-group">
+                                    <label for="displaytransid">Transaction Id</label>
+                                    <input for="displaytransid" class="form-control" value="@Model.transaction_ID" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="displaycustid">Customer Id</label>
+                                    <input for="displaycustid" class="form-control" value="@Model.customer_ID" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="date">Date</label>
+                                    <input asp-for="date" class="form-control" value="@Model.date">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="day_of_week">Day of Week</label>
+                                    <input asp-for="day_of_week" class="form-control" value="@Model.day_of_week">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="time">Time</label>
+                                    <input asp-for="time" class="form-control" value="@Model.time">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="bank">Bank</label>
+                                    <input asp-for="bank" class="form-control" value="@Model.bank">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="fraud">Fraud</label>
+                                    <input asp-for="fraud" type="text" class="form-control" id="exampleInputEmail1" value="@Model.fraud">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="entry_mode">Entry Mode</label>
+                                    <input asp-for="entry_mode" class="form-control" value="@Model.entry_mode">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="amount">Amount</label>
+                                    <input asp-for="amount" class="form-control" value="@Model.amount">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="type_of_transaction">Type of Transaction</label>
+                                    <input asp-for="type_of_transaction" class="form-control" value="@Model.type_of_transaction">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="country_of_transaction">Country of Transaction</label>
+                                    <input asp-for="country_of_transaction" class="form-control" value="@Model.country_of_transaction">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="shipping_address">Shipping Address</label>
+                                    <input asp-for="shipping_address" class="form-control" value="@Model.shipping_address">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="type_of_card">Type of Card</label>
+                                    <input asp-for="type_of_card" class="form-control" value="@Model.type_of_card">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">  
+                            <a class="btn btn-block btn-primary" asp-controller="Home" asp-action="Admin">Return to Admin Page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
