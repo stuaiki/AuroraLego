@@ -123,6 +123,58 @@ public class HomeController : Controller
 
         return View(new CheckoutOrderViewModel());
     }
+
+    public IActionResult Checkout(CheckoutOrderViewModel model)
+    {
+        var customerExists = _repo.Customers.Any(c => c.customer_ID == model.Order.Customer.customer_ID);
+
+        var order = new Order
+        {
+            // Assign properties directly that don't require conditional logic
+            date = model.Order.date,
+            day_of_week = model.Order.day_of_week,
+            time = model.Order.time,
+            entry_mode = model.Order.entry_mode,
+            amount = model.Order.amount,
+            type_of_transaction = model.Order.type_of_transaction,
+            country_of_transaction = model.Order.Customer.country_of_residence,
+            shipping_address = model.Order.shipping_address,
+            bank = model.Order.bank,
+            type_of_card = model.Order.type_of_card,
+            fraud = model.Order.fraud
+        };
+
+        if (customerExists)
+        {
+            order.customer_ID = model.Order.Customer.customer_ID;
+        }
+        else
+        {
+            var customer = new Customer()
+            {
+                first_name = model.Order.Customer.first_name,
+
+                last_name = model.Order.Customer.last_name,
+
+                birth_date = model.Order.Customer.birth_date,
+
+                country_of_residence = model.Order.Customer.country_of_residence,
+
+                gender = model.Order.Customer.gender,
+
+                age = model.Order.Customer.age
+            };
+
+            model.Order.Customer = _repo.AddCustomer(customer);
+        }
+
+
+
+        // Save the order to the database using the repository
+        _repo.AddOrder(order);
+
+        return View("OrderConfirmed", order);
+    }
     public IActionResult Product(int product_ID)
     {
         var id = product_ID;

@@ -55,6 +55,8 @@ public interface IAmazonRepository
 
 
     public void ChangeFraud(int orderId);
+
+    public Customer AddCustomer(Customer customer);
 }
 
     

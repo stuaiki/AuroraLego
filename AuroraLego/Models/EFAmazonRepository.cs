@@ -121,4 +121,11 @@ public class EFAmazonRepository : IAmazonRepository
             _context.SaveChanges();
         }
     }
+
+    public Customer AddCustomer(Customer customer)
+    {
+        _context.Add(customer); // This marks the entity as new and to be inserted
+        _context.SaveChanges(); // Saves all changes made in the context to the database
+        return customer;
+    }
 }
